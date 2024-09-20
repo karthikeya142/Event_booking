@@ -1,0 +1,95 @@
+{% extends 'webapp/base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <div class="card shadow p-3">
+        <div class="card-body">
+            <h3 class="card-title">Login</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+{% extends 'webapp/base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+    <div class="card shadow p-3">
+        <div class="card-body">
+            <h3 class="card-title">Register</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password1">Password</label>
+                    <input type="password" class="form-control" id="password1" name="password1" required>
+                </div>
+                <div class="form-group">
+                    <label for="password2">Confirm Password</label>
+                    <input type="password" class="form-control" id="password2" name="password2" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+def book_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+
+    if request.method == 'POST':
+        description = request.POST.get('description', '')
+        location = request.POST.get('location', '')
+        date = request.POST.get('date', '')
+        available_seats = request.POST.get('available_seats', '')
+
+        if event.available_seats > 0:
+            booking, created = Booking.objects.get_or_create(event=event, user=request.user)
+            if created:
+                event.available_seats -= 1
+                event.save()
+                 # Redirect to the event list or other appropriate page
+            else:
+                # User has already booked this event
+                return render(request, 'webapp/booking_status.html', {
+                    'message': "You have already booked this event.",
+                    'event': event
+                })
+        else:
+            # No seats available
+            return render(request, 'webapp/booking_status.html', {
+                'message': "No seats available for this event.",
+                'event': event
+            })
+    else:
+        # If it's a GET request, render a booking form or just the event details
+        return render(request, 'webapp/event_detail.html', {
+            'event': event,
+            'form': BookingForm()
+        })
+

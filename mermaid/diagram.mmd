@@ -1,0 +1,9 @@
+graph TD;
+    A[User] -->|register| B[CustomUserCreationForm]
+    A -->|login| C[AuthenticationForm]
+    A -->|view events| D[Event List]
+    D -->|select event| E[Event Detail]
+    E -->|book tickets| F[Booking Form]
+    F -->|submit booking| G[Booking]
+    G -->|update| H[Event]
+    G -->|display status| I[Booking Status]

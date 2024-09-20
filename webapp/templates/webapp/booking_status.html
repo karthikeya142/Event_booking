@@ -1,0 +1,28 @@
+
+
+{% extends 'webapp/base.html' %}
+
+{% block title %}Booking Status{% endblock %}
+
+{% block content %}
+    <div class="card shadow p-3">
+        <div class="card-body">
+            <h3 class="card-title">Booking Status</h3>
+
+            <!-- Display the event details -->
+            <p><strong>Event:</strong> {{ event.title }}</p>
+            <p><strong>Date:</strong> {{ event.date }}</p>
+            <p><strong>Location:</strong> {{ event.location }}</p>
+            <p><strong>Description:</strong> {{ event.description }}</p>
+            <p><strong>Remaining Seats:</strong> {{ remaining_seats }}</p>
+
+            <!-- Success Message -->
+            <div class="alert alert-success" role="alert">
+                Your booking was successful!
+            </div>
+
+            <!-- Link to go back to the event list -->
+            <a href="{% url 'event_list' %}" class="btn btn-primary">Back to Events</a>
+        </div>
+    </div>
+{% endblock %}

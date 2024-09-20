@@ -1,0 +1,13 @@
+
+{% extends 'webapp/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div class="jumbotron p-4 shadow">
+        <h1 class="display-4">Welcome to the Event Booking System!</h1>
+        <p class="lead">Discover and book events in your area with ease.</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'event_list' %}" role="button">View Events</a>
+    </div>
+{% endblock %}
+
+
+

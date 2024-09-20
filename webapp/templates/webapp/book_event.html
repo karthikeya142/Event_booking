@@ -1,0 +1,40 @@
+{% extends 'webapp/base.html' %}
+
+{% block title %}Book Event{% endblock %}
+
+{% block content %}
+    <div class="card shadow p-3">
+        <div class="card-body">
+            <h3 class="card-title">Book Event: {{ event.title }}</h3>
+
+            <!-- Display event details -->
+            <p><strong>Date:</strong> {{ event.date }}</p>
+            <p><strong>Location:</strong> {{ event.location }}</p>
+            <p><strong>Description:</strong> {{ event.description }}</p>
+            <p><strong>Available Seats:</strong> {{ event.available_seats }}</p>
+
+            <!-- Booking Form -->
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="number_of_tickets">Number of Tickets</label>
+                    <input type="number" class="form-control" id="number_of_tickets" name="number_of_tickets" min="1" max="{{ event.available_seats }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="booking_date">Booking Date</label>
+                    <input type="date" class="form-control" id="booking_date" name="booking_date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="booking_location">Booking Location</label>
+                    <input type="text" class="form-control" id="booking_location" name="booking_location" required>
+                </div>
+                <a href="{% url 'booking_status' event.id %}" class="btn btn-primary">Book Now</a>
+
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

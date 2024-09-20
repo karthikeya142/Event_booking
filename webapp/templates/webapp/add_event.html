@@ -1,0 +1,39 @@
+{% extends 'webapp/base.html' %}
+{% block title %}Add Event{% endblock %}
+
+{% block content %}
+    <div class="card shadow p-3">
+        <div class="card-body">
+            <h3 class="card-title">Add New Event</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Event Title</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Event Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Event Date</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="available_seats">Available Seats</label>
+                    <input type="number" class="form-control" id="available_seats" name="available_seats" min="1" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Event</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
