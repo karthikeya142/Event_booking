@@ -87,11 +87,13 @@ order to create a super user, type
 Python Manage.py createsuperuser
 ```
 giving usrname: Event
-give dummy mail: Event@gmail.com
-password : Event123
-Superuser created successfully. run server
-login :http://127.0.0.1:8000/admin/
 
+give dummy mail: Event@gmail.com
+
+password : Event123
+
+Superuser created successfully. run server
+login :http://localhost:8000/
 
 
 Usage
