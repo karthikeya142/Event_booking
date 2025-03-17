@@ -1,4 +1,4 @@
-Django
+django
 djangorestframework  # If you plan to use Django REST Framework
 psycopg2-binary     # For PostgreSQL support (if applicable)
 gunicorn             # WSGI HTTP Server for production
